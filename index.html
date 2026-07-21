@@ -370,12 +370,14 @@
         <div>
           <h2>One fraud alert a week. No noise.</h2>
           <p>Short, practical, written the same way as the case files above. Unsubscribe any time.</p>
-          <form class="signup" name="newsletter" method="POST" data-netlify="true" netlify-honeypot="bot-field">
-            <input type="hidden" name="form-name" value="newsletter">
-            <input type="text" name="bot-field" style="display:none">
-            <input type="email" name="email" placeholder="you@company.com" required aria-label="Email address">
-            <button type="submit" class="btn-primary">Subscribe</button>
-          </form>
+        <form class="signup" name="newsletter" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+    <input type="hidden" name="form-name" value="newsletter" />
+    <p style="display:none">
+        <label>Don’t fill this out if you're human: <input name="bot-field" /></label>
+    </p>
+    <input type="email" name="email" placeholder="you@company.com" required aria-label="Email address" />
+    <button type="submit" class="btn-primary">Subscribe</button>
+</form>
           <small>Powered by Netlify Forms — works automatically once deployed, no backend required.</small>
         </div>
         <div class="trust-row" style="flex-direction:column;">
