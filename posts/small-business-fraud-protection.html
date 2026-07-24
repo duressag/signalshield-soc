@@ -1,19 +1,173 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Small Business Fraud Protection | Signal &amp; Shield</title>
-    <style>
-        body { font-family: system-ui, sans-serif; line-height: 1.6; max-width: 800px; margin: 0 auto; padding: 2rem 1rem; color: #1a202c; }
-        h1 { color: #0f172a; }
-        a { color: #2563eb; text-decoration: none; }
-        a:hover { text-decoration: underline; }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>5 Simple Ways Small Businesses Can Protect Themselves From Cyber Fraud — Signal &amp; Shield</title>
+<meta name="description" content="Real tactics fraud analysts see work in practice — five things a small business can actually do this week to cut its fraud risk, no security team required.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#080D18;
+  --ink-2:#0E1626;
+  --paper:#F3F2ED;
+  --neon:#2EE6FF;
+  --neon-dim: rgba(46,230,255,0.12);
+  --amber:#FFB020;
+  --teal:#2DD4BF;
+  --slate:#8B95A7;
+  --slate-dim:#5B657A;
+  --red:#EF4444;
+  --line: rgba(139,149,167,0.18);
+  --display: 'Inter', sans-serif;
+  --body: 'Inter', sans-serif;
+  --mono: 'IBM Plex Mono', monospace;
+}
+*{box-sizing:border-box; margin:0; padding:0;}
+html{scroll-behavior:smooth;}
+body{
+  background:var(--ink); color:var(--paper); font-family:var(--body);
+  line-height:1.55; -webkit-font-smoothing:antialiased;
+}
+a{color:inherit; text-decoration:none;}
+img,svg{max-width:100%; display:block;}
+::selection{ background:var(--neon); color:var(--ink); }
+:focus-visible{ outline:2px solid var(--neon); outline-offset:3px; }
+.wrap{ max-width:1120px; margin:0 auto; padding:0 28px; }
+
+header{
+  position:sticky; top:0; z-index:50;
+  background:rgba(8,13,24,0.88); backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--line);
+}
+.nav{ display:flex; align-items:center; justify-content:space-between; padding:18px 0; }
+.logo{ font-family:var(--mono); font-weight:600; font-size:15px; letter-spacing:0.02em; display:flex; align-items:center; gap:8px; }
+.logo .dot{ width:8px; height:8px; border-radius:50%; background:var(--neon); box-shadow:0 0 0 3px var(--neon-dim); animation:pulse 2.4s ease-in-out infinite; }
+@keyframes pulse{ 0%,100%{ box-shadow:0 0 0 3px var(--neon-dim); } 50%{ box-shadow:0 0 0 6px rgba(46,230,255,0.06); } }
+.navlinks{ display:flex; align-items:center; gap:28px; font-size:14px; color:var(--slate); }
+.navlinks a:hover{ color:var(--paper); }
+.nav-cta{ font-family:var(--mono); font-size:12.5px; color:var(--ink); background:var(--neon); padding:9px 16px; border-radius:3px; font-weight:600; }
+
+/* ---------- Article ---------- */
+.article-head{ padding:56px 0 40px; border-bottom:1px solid var(--line); }
+.crumb{ font-family:var(--mono); font-size:12.5px; color:var(--slate-dim); margin-bottom:22px; display:inline-flex; gap:8px; }
+.crumb a{ color:var(--neon); border-bottom:1px solid transparent; }
+.crumb a:hover{ border-bottom-color:var(--neon); }
+.case-tag{ display:inline-block; font-family:var(--mono); font-size:10.5px; letter-spacing:0.05em; padding:3px 8px; border-radius:2px; margin-bottom:16px; text-transform:uppercase; background:rgba(255,176,32,0.12); color:var(--amber); }
+.article-head h1{ font-family:var(--display); font-weight:800; font-size:clamp(28px, 4vw, 42px); line-height:1.12; letter-spacing:-0.02em; margin-bottom:18px; max-width:20ch; }
+.dek{ color:var(--slate); font-size:17px; max-width:56ch; margin-bottom:26px; }
+.meta-row{ display:flex; gap:22px; flex-wrap:wrap; font-family:var(--mono); font-size:12px; color:var(--slate-dim); }
+.meta-row b{ color:var(--paper); font-weight:600; }
+
+.article-body{ padding:52px 0 20px; max-width:680px; }
+.article-body p{ color:var(--slate); font-size:16px; margin-bottom:20px; }
+.article-body p.lead{ color:var(--paper); font-size:18px; margin-bottom:28px; }
+.article-body h2{ font-family:var(--display); font-size:23px; font-weight:800; color:var(--paper); margin:40px 0 14px; letter-spacing:-0.01em; }
+.article-body h2 .num{ font-family:var(--mono); color:var(--neon); font-size:15px; margin-right:10px; }
+.article-body strong{ color:var(--paper); }
+.callout{ border-left:2px solid var(--neon); background:rgba(46,230,255,0.05); padding:16px 20px; margin:20px 0 28px; border-radius:0 4px 4px 0; }
+.callout p{ margin-bottom:0; color:var(--paper); font-size:14.5px; font-family:var(--mono); line-height:1.6; }
+.callout p b{ color:var(--neon); }
+.divider{ height:1px; background:var(--line); margin:44px 0; }
+.closing{ font-family:var(--mono); font-size:12.5px; color:var(--slate-dim); margin-top:36px; }
+
+.byline{ display:flex; align-items:center; gap:14px; padding:32px 0; border-top:1px solid var(--line); border-bottom:1px solid var(--line); margin-top:12px; max-width:680px; }
+.byline .av{ width:40px; height:40px; border-radius:50%; background:var(--ink-2); border:1px solid var(--line); display:flex; align-items:center; justify-content:center; font-family:var(--mono); color:var(--neon); font-size:13px; font-weight:600; }
+.byline .name{ font-family:var(--display); font-weight:700; font-size:14.5px; }
+.byline .role{ font-family:var(--mono); font-size:12px; color:var(--slate-dim); }
+
+.back-cta{ padding:52px 0 68px; max-width:680px; }
+.back-cta a{ font-family:var(--mono); font-size:13px; color:var(--paper); border-bottom:1px solid var(--neon); }
+
+footer{ padding:36px 0; border-top:1px solid var(--line); }
+.foot-row{ display:flex; justify-content:space-between; align-items:center; font-size:13px; color:var(--slate-dim); flex-wrap:wrap; gap:10px; }
+.foot-row .mono{ font-family:var(--mono); }
+
+@media (max-width:720px){
+  .navlinks a{ display:none; }
+}
+</style>
 </head>
 <body>
-    <p><a href="/">&larr; Back to Home</a></p>
+
+<header>
+  <div class="wrap nav">
+    <a href="/index.html" class="logo"><span class="dot"></span> SIGNAL &amp; SHIELD</a>
+    <nav class="navlinks">
+      <a href="/index.html#posts">Articles</a>
+      <a href="/index.html#about">About</a>
+      <a class="nav-cta" href="/index.html#signup">Get alerts</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="article-head wrap">
+    <div class="crumb"><a href="/index.html">Home</a> <span>/</span> <a href="/index.html#posts">Case files</a> <span>/</span> <span>Case 001</span></div>
+    <span class="case-tag">Fraud Prevention</span>
     <h1>5 Simple Ways Small Businesses Can Protect Themselves From Cyber Fraud</h1>
-    <p>Real tactics fraud analysts see work in practice — not generic checklist advice.</p>
+    <p class="dek">Real tactics fraud analysts see work in practice — not generic checklist advice — for businesses that can't afford a dedicated security team.</p>
+    <div class="meta-row">
+      <span><b>Case</b> 001</span>
+      <span><b>Read time</b> 6 min</span>
+      <span><b>Filed under</b> Fraud Prevention</span>
+    </div>
+  </section>
+
+  <article class="article-body wrap">
+    <p class="lead">Most of the fraud that hits small businesses isn't sophisticated. It's the same handful of moves, run again and again, because they keep working. The good news: the fixes are just as unglamorous — and most of them take less than an hour to put in place.</p>
+
+    <p>Here are the five that actually move the needle, based on the patterns that show up over and over in fraud cases involving businesses without a dedicated security team.</p>
+
+    <div class="divider"></div>
+
+    <h2><span class="num">01</span>Turn on two-factor authentication everywhere it's offered</h2>
+    <p>A stolen or guessed password is the single most common entry point into a business account — email, banking, payroll, cloud storage. Two-factor authentication (2FA) means a password alone isn't enough to get in; the attacker also needs a code from your phone or an authenticator app.</p>
+    <p>Start with the accounts that would hurt most if compromised: email, banking and payment platforms, and any admin panel. Use an authenticator app (Google Authenticator, Authy) rather than SMS codes where possible — SMS-based 2FA can be defeated by SIM-swap fraud, which is its own growing problem.</p>
+    <div class="callout"><p><b>Why it matters:</b> 2FA blocks the large majority of automated account-takeover attempts, because most attackers give up the moment a second factor is required.</p></div>
+
+    <h2><span class="num">02</span>Stop reusing passwords — use a password manager</h2>
+    <p>When one site gets breached, attackers don't stop there. They test the same email-and-password combination against banking sites, email providers, and business tools, because so many people reuse passwords across accounts. This single habit is behind a large share of the account-takeover cases that cross a SOC analyst's desk.</p>
+    <p>A password manager (Bitwarden and 1Password are both solid, low-friction choices) generates and stores a unique password for every account, so a breach at one company doesn't cascade into your business accounts. Setup takes under 20 minutes for a small team.</p>
+
+    <h2><span class="num">03</span>Slow down on urgent payment requests</h2>
+    <p>Invoice fraud and "CEO fraud" follow a predictable script: an email or text that looks like it's from a vendor, a boss, or a bank, asking for an urgent wire transfer, a change to payment details, or a gift card purchase. The urgency is the tell — it's designed to make you act before you verify.</p>
+    <p>The fix is a simple rule, applied without exception: any request to change payment details or send money on short notice gets confirmed through a second channel — a phone call to a known number, not a reply to the email — before anything moves. Put this in writing so every employee who touches payments knows it's policy, not a judgment call.</p>
+    <div class="callout"><p><b>Field note:</b> fake vendor emails changing "updated bank details" are one of the most common fraud patterns targeting small businesses right now — and one phone call stops nearly all of them.</p></div>
+
+    <h2><span class="num">04</span>Keep software patched and back up your data properly</h2>
+    <p>Most ransomware doesn't get in through some exotic exploit — it gets in through known vulnerabilities that a software update would have already fixed. Turn on automatic updates for operating systems, browsers, and any business software that offers them.</p>
+    <p>Pair that with real backups, following the 3-2-1 rule: three copies of your data, on two different types of storage, with one copy kept offline or off-site. If ransomware does hit, a working backup is the difference between a bad afternoon and a business-ending event.</p>
+
+    <h2><span class="num">05</span>Train your team on the patterns, not just a slideshow once a year</h2>
+    <p>Generic annual security training rarely changes behavior. What works better is short, specific, recurring reminders tied to real patterns: what a phishing text actually looks like, what a spoofed caller ID sounds like, why a "verify your account" link deserves a second look before it's clicked.</p>
+    <p>Five minutes at a team meeting, once a month, covering one real example, beats an hour-long training nobody remembers by the following week.</p>
+
+    <div class="divider"></div>
+
+    <p class="closing">None of this requires a security budget. It requires picking one of these five and actually doing it this week — then coming back for the next one.</p>
+
+    <div class="byline">
+      <div class="av">SS</div>
+      <div>
+        <div class="name">Signal &amp; Shield Desk</div>
+        <div class="role">Written from the SOC floor — telecom fraud &amp; incident response</div>
+      </div>
+    </div>
+
+    <div class="back-cta">
+      <a href="/index.html#posts">← Back to all case files</a>
+    </div>
+  </article>
+</main>
+
+<footer class="wrap">
+  <div class="foot-row">
+    <span class="mono">© 2026 SIGNAL &amp; SHIELD</span>
+    <span>Built with care, not templates.</span>
+  </div>
+</footer>
+
 </body>
 </html>
