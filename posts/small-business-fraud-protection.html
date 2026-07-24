@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>5 Simple Ways Small Businesses Can Protect Themselves From Cyber Fraud — Signal &amp; Shield</title>
-<meta name="description" content="Real tactics fraud analysts see work in practice — five things a small business can actually do this week to cut its fraud risk, no security team required.">
+<title>Signal &amp; Shield — Practical Cyber Security</title>
+<meta name="description" content="Practical, no-nonsense cyber security and fraud-prevention guidance for small businesses and everyday users, written by a working SOC analyst.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
@@ -26,9 +26,16 @@
 }
 *{box-sizing:border-box; margin:0; padding:0;}
 html{scroll-behavior:smooth;}
+html, body{
+  overflow-x: hidden;
+  width: 100%;
+}
 body{
-  background:var(--ink); color:var(--paper); font-family:var(--body);
-  line-height:1.55; -webkit-font-smoothing:antialiased;
+  background:var(--ink);
+  color:var(--paper);
+  font-family:var(--body);
+  line-height:1.55;
+  -webkit-font-smoothing:antialiased;
 }
 a{color:inherit; text-decoration:none;}
 img,svg{max-width:100%; display:block;}
@@ -36,56 +43,210 @@ img,svg{max-width:100%; display:block;}
 :focus-visible{ outline:2px solid var(--neon); outline-offset:3px; }
 .wrap{ max-width:1120px; margin:0 auto; padding:0 28px; }
 
+/* ---------- Header ---------- */
 header{
   position:sticky; top:0; z-index:50;
-  background:rgba(8,13,24,0.88); backdrop-filter:blur(10px);
+  background:rgba(8,13,24,0.88);
+  backdrop-filter:blur(10px);
   border-bottom:1px solid var(--line);
 }
 .nav{ display:flex; align-items:center; justify-content:space-between; padding:18px 0; }
-.logo{ font-family:var(--mono); font-weight:600; font-size:15px; letter-spacing:0.02em; display:flex; align-items:center; gap:8px; }
-.logo .dot{ width:8px; height:8px; border-radius:50%; background:var(--neon); box-shadow:0 0 0 3px var(--neon-dim); animation:pulse 2.4s ease-in-out infinite; }
-@keyframes pulse{ 0%,100%{ box-shadow:0 0 0 3px var(--neon-dim); } 50%{ box-shadow:0 0 0 6px rgba(46,230,255,0.06); } }
+.logo{
+  font-family:var(--mono); font-weight:600; font-size:15px;
+  letter-spacing:0.02em; display:flex; align-items:center; gap:8px;
+}
+.logo .dot{
+  width:8px; height:8px; border-radius:50%; background:var(--neon);
+  box-shadow:0 0 0 3px var(--neon-dim);
+  animation:pulse 2.4s ease-in-out infinite;
+}
+@keyframes pulse{
+  0%,100%{ box-shadow:0 0 0 3px var(--neon-dim); }
+  50%{ box-shadow:0 0 0 6px rgba(46,230,255,0.06); }
+}
 .navlinks{ display:flex; align-items:center; gap:28px; font-size:14px; color:var(--slate); }
 .navlinks a:hover{ color:var(--paper); }
-.nav-cta{ font-family:var(--mono); font-size:12.5px; color:var(--ink); background:var(--neon); padding:9px 16px; border-radius:3px; font-weight:600; }
+.nav-cta{
+  font-family:var(--mono); font-size:12.5px; color:var(--ink);
+  background:var(--neon); padding:9px 16px; border-radius:3px; font-weight:600;
+}
 
-/* ---------- Article ---------- */
-.article-head{ padding:56px 0 40px; border-bottom:1px solid var(--line); }
-.crumb{ font-family:var(--mono); font-size:12.5px; color:var(--slate-dim); margin-bottom:22px; display:inline-flex; gap:8px; }
-.crumb a{ color:var(--neon); border-bottom:1px solid transparent; }
-.crumb a:hover{ border-bottom-color:var(--neon); }
-.case-tag{ display:inline-block; font-family:var(--mono); font-size:10.5px; letter-spacing:0.05em; padding:3px 8px; border-radius:2px; margin-bottom:16px; text-transform:uppercase; background:rgba(255,176,32,0.12); color:var(--amber); }
-.article-head h1{ font-family:var(--display); font-weight:800; font-size:clamp(28px, 4vw, 42px); line-height:1.12; letter-spacing:-0.02em; margin-bottom:18px; max-width:20ch; }
-.dek{ color:var(--slate); font-size:17px; max-width:56ch; margin-bottom:26px; }
-.meta-row{ display:flex; gap:22px; flex-wrap:wrap; font-family:var(--mono); font-size:12px; color:var(--slate-dim); }
-.meta-row b{ color:var(--paper); font-weight:600; }
+/* ---------- Ticker ---------- */
+.ticker-bar{
+  border-bottom:1px solid var(--line); background:var(--ink-2);
+  overflow:hidden; white-space:nowrap; position:relative;
+}
+.ticker-bar::before, .ticker-bar::after{
+  content:''; position:absolute; top:0; bottom:0; width:60px; z-index:2; pointer-events:none;
+}
+.ticker-bar::before{ left:0; background:linear-gradient(90deg, var(--ink-2), transparent); }
+.ticker-bar::after{ right:0; background:linear-gradient(-90deg, var(--ink-2), transparent); }
+.ticker-track{
+  display:inline-flex; gap:48px; padding:11px 0;
+  animation:scroll 42s linear infinite;
+  font-family:var(--mono); font-size:12.5px; color:var(--slate);
+}
+.ticker-bar:hover .ticker-track{ animation-play-state:paused; }
+@keyframes scroll{ from{ transform:translateX(0); } to{ transform:translateX(-50%); } }
+.tk{ display:inline-flex; align-items:center; gap:8px; }
+.tk b{ font-weight:600; letter-spacing:0.03em; }
+.tk.alert b{ color:var(--red); }
+.tk.tip b{ color:var(--amber); }
+.tk.note b{ color:var(--neon); }
 
-.article-body{ padding:52px 0 20px; max-width:680px; }
-.article-body p{ color:var(--slate); font-size:16px; margin-bottom:20px; }
-.article-body p.lead{ color:var(--paper); font-size:18px; margin-bottom:28px; }
-.article-body h2{ font-family:var(--display); font-size:23px; font-weight:800; color:var(--paper); margin:40px 0 14px; letter-spacing:-0.01em; }
-.article-body h2 .num{ font-family:var(--mono); color:var(--neon); font-size:15px; margin-right:10px; }
-.article-body strong{ color:var(--paper); }
-.callout{ border-left:2px solid var(--neon); background:rgba(46,230,255,0.05); padding:16px 20px; margin:20px 0 28px; border-radius:0 4px 4px 0; }
-.callout p{ margin-bottom:0; color:var(--paper); font-size:14.5px; font-family:var(--mono); line-height:1.6; }
-.callout p b{ color:var(--neon); }
-.divider{ height:1px; background:var(--line); margin:44px 0; }
-.closing{ font-family:var(--mono); font-size:12.5px; color:var(--slate-dim); margin-top:36px; }
+/* ---------- Hero ---------- */
+.hero{ padding:80px 0 60px; border-bottom:1px solid var(--line); }
+.hero-grid{ display:grid; grid-template-columns:1.1fr 0.9fr; gap:48px; align-items:center; }
+.eyebrow{
+  font-family:var(--mono); font-size:12.5px; color:var(--slate);
+  display:flex; align-items:center; gap:10px; margin-bottom:20px;
+}
+.eyebrow::before{ content:'//'; color:var(--neon); }
+h1{
+  font-family:var(--display); font-weight:800;
+  font-size:clamp(32px, 4.6vw, 52px); line-height:1.08; letter-spacing:-0.02em;
+  margin-bottom:18px;
+}
+h1 .accent{ color:var(--neon); }
+.sub{
+  color:var(--slate); font-size:17px; max-width:48ch; margin-bottom:30px;
+}
+.hero-ctas{ display:flex; align-items:center; gap:18px; flex-wrap:wrap; margin-bottom:14px; }
+.btn-primary{
+  display:inline-flex; align-items:center; gap:8px;
+  background:var(--neon); color:var(--ink); font-weight:700; font-size:14.5px;
+  padding:13px 22px; border-radius:4px; border:none; cursor:pointer;
+  transition:transform 0.15s ease, box-shadow 0.15s ease;
+}
+.btn-primary:hover{ transform:translateY(-1px); box-shadow:0 6px 20px rgba(46,230,255,0.25); }
+.btn-ghost{
+  font-family:var(--mono); font-size:13px; color:var(--paper);
+  border-bottom:1px solid var(--slate-dim);
+}
+.badge{
+  display:inline-flex; align-items:center; gap:8px; margin-top:12px;
+  font-family:var(--mono); font-size:12.5px; color:var(--teal);
+  border:1px solid rgba(45,212,191,0.35); background:rgba(45,212,191,0.06);
+  padding:7px 14px; border-radius:3px;
+}
+.badge::before{ content:'✓'; }
 
-.byline{ display:flex; align-items:center; gap:14px; padding:32px 0; border-top:1px solid var(--line); border-bottom:1px solid var(--line); margin-top:12px; max-width:680px; }
-.byline .av{ width:40px; height:40px; border-radius:50%; background:var(--ink-2); border:1px solid var(--line); display:flex; align-items:center; justify-content:center; font-family:var(--mono); color:var(--neon); font-size:13px; font-weight:600; }
-.byline .name{ font-family:var(--display); font-weight:700; font-size:14.5px; }
-.byline .role{ font-family:var(--mono); font-size:12px; color:var(--slate-dim); }
+.hero-art{ position:relative; }
+.hero-art svg{ width:100%; height:auto; }
 
-.back-cta{ padding:52px 0 68px; max-width:680px; }
-.back-cta a{ font-family:var(--mono); font-size:13px; color:var(--paper); border-bottom:1px solid var(--neon); }
+.status-panel{
+  margin-top:44px; border:1px solid var(--line); border-radius:6px; overflow:hidden; background:var(--ink-2);
+}
+.status-head{
+  display:flex; justify-content:space-between; align-items:center;
+  padding:12px 18px; border-bottom:1px solid var(--line);
+  font-family:var(--mono); font-size:11.5px; color:var(--slate); letter-spacing:0.04em;
+}
+.status-grid{ display:grid; grid-template-columns:repeat(3,1fr); }
+.status-cell{ padding:20px 18px; border-right:1px solid var(--line); }
+.status-cell:last-child{ border-right:none; }
+.status-num{ font-family:var(--display); font-size:26px; font-weight:800; color:var(--paper); }
+.status-label{ font-family:var(--mono); font-size:11px; color:var(--slate-dim); margin-top:4px; }
 
-footer{ padding:36px 0; border-top:1px solid var(--line); }
+/* ---------- Sections ---------- */
+.section{ padding:68px 0; border-bottom:1px solid var(--line); }
+.section-head{ display:flex; justify-content:space-between; align-items:baseline; margin-bottom:34px; }
+.section-title{ font-family:var(--display); font-size:24px; font-weight:800; }
+.section-sub{ font-family:var(--mono); font-size:12px; color:var(--slate-dim); }
+
+/* ---------- Article cards ---------- */
+.case{
+  display:grid; grid-template-columns:64px 100px 1fr auto; gap:20px; align-items:start;
+  padding:26px 0; border-top:1px solid var(--line); transition:background 0.15s ease;
+}
+.case:last-child{ border-bottom:1px solid var(--line); }
+.case:hover{ background:rgba(46,230,255,0.03); }
+.thumb{
+  width:64px; height:64px; border-radius:6px; display:flex; align-items:center; justify-content:center;
+  background:var(--ink-2); border:1px solid var(--line);
+}
+.case-id{ font-family:var(--mono); font-size:12.5px; color:var(--slate-dim); padding-top:3px; }
+.case-id span{ display:block; color:var(--neon); font-weight:600; margin-bottom:4px; }
+.case-tag{
+  display:inline-block; font-family:var(--mono); font-size:10.5px; letter-spacing:0.05em;
+  padding:2px 7px; border-radius:2px; margin-bottom:10px; text-transform:uppercase;
+}
+.case-tag.fraud{ background:rgba(255,176,32,0.12); color:var(--amber); }
+.case-tag.telecom{ background:rgba(46,230,255,0.12); color:var(--neon); }
+.case-tag.ir{ background:rgba(239,68,68,0.12); color:var(--red); }
+.case h3{ font-family:var(--display); font-size:19px; font-weight:700; margin-bottom:8px; line-height:1.3; }
+.case p{ color:var(--slate); font-size:14.5px; max-width:54ch; }
+.case-meta{ font-family:var(--mono); font-size:12px; color:var(--slate-dim); white-space:nowrap; padding-top:3px; }
+.case a.readmore{
+  display:inline-block; margin-top:12px; font-family:var(--mono); font-size:12.5px; color:var(--paper);
+  border-bottom:1px solid var(--neon);
+}
+
+/* ---------- Newsletter ---------- */
+.engage{ background:var(--ink-2); border-radius:10px; padding:44px; border:1px solid var(--line); }
+.engage-grid{ display:grid; grid-template-columns:1.1fr 0.9fr; gap:40px; align-items:center; }
+.engage h2{ font-family:var(--display); font-size:24px; font-weight:800; margin-bottom:10px; }
+.engage p{ color:var(--slate); font-size:14.5px; max-width:44ch; }
+.signup{ display:flex; gap:10px; margin-top:20px; flex-wrap:wrap; }
+.signup input{
+  flex:1; min-width:200px; background:var(--ink); border:1px solid var(--line); border-radius:4px;
+  padding:13px 14px; color:var(--paper); font-family:var(--body); font-size:14px;
+}
+.signup input:focus-visible{ outline:2px solid var(--neon); }
+.signup small{ display:block; margin-top:10px; font-family:var(--mono); font-size:11.5px; color:var(--slate-dim); }
+
+.trust-row{ display:flex; gap:16px; flex-wrap:wrap; margin-top:24px; }
+.trust-item{
+  font-family:var(--mono); font-size:11.5px; color:var(--slate-dim);
+  border:1px dashed var(--line); border-radius:4px; padding:14px 18px; flex:1; min-width:180px;
+}
+
+/* ---------- About ---------- */
+.about{ display:grid; grid-template-columns:1fr 1fr; gap:56px; align-items:start; }
+.about p{ color:var(--slate); font-size:15.5px; margin-bottom:16px; max-width:52ch; }
+.about-card{ border:1px solid var(--line); border-radius:6px; padding:24px; background:var(--ink-2); }
+.about-card .k{ font-family:var(--mono); font-size:11px; color:var(--slate-dim); text-transform:uppercase; letter-spacing:0.05em; }
+.about-card .v{ font-family:var(--display); font-size:16px; font-weight:700; margin-top:4px; margin-bottom:18px; }
+.about-card .v:last-child{ margin-bottom:0; }
+
+footer{ padding:36px 0; }
 .foot-row{ display:flex; justify-content:space-between; align-items:center; font-size:13px; color:var(--slate-dim); flex-wrap:wrap; gap:10px; }
 .foot-row .mono{ font-family:var(--mono); }
 
+/* ---------- Tablet / small desktop ---------- */
+@media (max-width:860px){
+  .hero-grid{ grid-template-columns:1fr; }
+  .hero-art{ order:-1; max-width:320px; margin:0 auto 8px; }
+  .engage-grid{ grid-template-columns:1fr; }
+}
+
+/* ---------- Phone ---------- */
 @media (max-width:720px){
+  .status-grid{ grid-template-columns:1fr; }
+  .status-cell{ border-right:none; border-bottom:1px solid var(--line); }
+  .status-cell:last-child{ border-bottom:none; }
+  .case{ grid-template-columns:1fr; gap:10px; }
+  .thumb{ display:none; }
+  .case-meta{ order:-1; }
+  .about{ grid-template-columns:1fr; }
   .navlinks a{ display:none; }
+}
+
+/* ---------- Small phone ---------- */
+@media (max-width:480px){
+  .wrap{ padding: 0 18px; }
+  h1{ font-size: 28px; }
+  .hero{ padding: 56px 0 40px; }
+  .engage{ padding: 28px; }
+  .status-cell{ padding: 16px 14px; }
+  .nav-cta{ padding: 8px 12px; font-size: 11.5px; }
+  .signup{ flex-direction: column; }
+  .signup input, .signup .btn-primary{ width: 100%; }
+}
+
+@media (prefers-reduced-motion: reduce){
+  .ticker-track{ animation:none; }
+  .logo .dot{ animation:none; }
 }
 </style>
 </head>
@@ -93,73 +254,159 @@ footer{ padding:36px 0; border-top:1px solid var(--line); }
 
 <header>
   <div class="wrap nav">
-    <a href="/index.html" class="logo"><span class="dot"></span> SIGNAL &amp; SHIELD</a>
+    <div class="logo"><span class="dot"></span> SIGNAL &amp; SHIELD</div>
     <nav class="navlinks">
-      <a href="/index.html#posts">Articles</a>
-      <a href="/index.html#about">About</a>
-      <a class="nav-cta" href="/index.html#signup">Get alerts</a>
+      <a href="#top">Home</a>
+      <a href="#posts">Articles</a>
+      <a href="#about">About</a>
+      <a class="nav-cta" href="#signup">Get alerts</a>
     </nav>
   </div>
 </header>
 
-<main>
-  <section class="article-head wrap">
-    <div class="crumb"><a href="/index.html">Home</a> <span>/</span> <a href="/index.html#posts">Case files</a> <span>/</span> <span>Case 001</span></div>
-    <span class="case-tag">Fraud Prevention</span>
-    <h1>5 Simple Ways Small Businesses Can Protect Themselves From Cyber Fraud</h1>
-    <p class="dek">Real tactics fraud analysts see work in practice — not generic checklist advice — for businesses that can't afford a dedicated security team.</p>
-    <div class="meta-row">
-      <span><b>Case</b> 001</span>
-      <span><b>Read time</b> 6 min</span>
-      <span><b>Filed under</b> Fraud Prevention</span>
-    </div>
-  </section>
+<div class="ticker-bar" aria-label="Live field notes">
+  <div class="ticker-track" id="tickerTrack"></div>
+</div>
 
-  <article class="article-body wrap">
-    <p class="lead">Most of the fraud that hits small businesses isn't sophisticated. It's the same handful of moves, run again and again, because they keep working. The good news: the fixes are just as unglamorous — and most of them take less than an hour to put in place.</p>
-
-    <p>Here are the five that actually move the needle, based on the patterns that show up over and over in fraud cases involving businesses without a dedicated security team.</p>
-
-    <div class="divider"></div>
-
-    <h2><span class="num">01</span>Turn on two-factor authentication everywhere it's offered</h2>
-    <p>A stolen or guessed password is the single most common entry point into a business account — email, banking, payroll, cloud storage. Two-factor authentication (2FA) means a password alone isn't enough to get in; the attacker also needs a code from your phone or an authenticator app.</p>
-    <p>Start with the accounts that would hurt most if compromised: email, banking and payment platforms, and any admin panel. Use an authenticator app (Google Authenticator, Authy) rather than SMS codes where possible — SMS-based 2FA can be defeated by SIM-swap fraud, which is its own growing problem.</p>
-    <div class="callout"><p><b>Why it matters:</b> 2FA blocks the large majority of automated account-takeover attempts, because most attackers give up the moment a second factor is required.</p></div>
-
-    <h2><span class="num">02</span>Stop reusing passwords — use a password manager</h2>
-    <p>When one site gets breached, attackers don't stop there. They test the same email-and-password combination against banking sites, email providers, and business tools, because so many people reuse passwords across accounts. This single habit is behind a large share of the account-takeover cases that cross a SOC analyst's desk.</p>
-    <p>A password manager (Bitwarden and 1Password are both solid, low-friction choices) generates and stores a unique password for every account, so a breach at one company doesn't cascade into your business accounts. Setup takes under 20 minutes for a small team.</p>
-
-    <h2><span class="num">03</span>Slow down on urgent payment requests</h2>
-    <p>Invoice fraud and "CEO fraud" follow a predictable script: an email or text that looks like it's from a vendor, a boss, or a bank, asking for an urgent wire transfer, a change to payment details, or a gift card purchase. The urgency is the tell — it's designed to make you act before you verify.</p>
-    <p>The fix is a simple rule, applied without exception: any request to change payment details or send money on short notice gets confirmed through a second channel — a phone call to a known number, not a reply to the email — before anything moves. Put this in writing so every employee who touches payments knows it's policy, not a judgment call.</p>
-    <div class="callout"><p><b>Field note:</b> fake vendor emails changing "updated bank details" are one of the most common fraud patterns targeting small businesses right now — and one phone call stops nearly all of them.</p></div>
-
-    <h2><span class="num">04</span>Keep software patched and back up your data properly</h2>
-    <p>Most ransomware doesn't get in through some exotic exploit — it gets in through known vulnerabilities that a software update would have already fixed. Turn on automatic updates for operating systems, browsers, and any business software that offers them.</p>
-    <p>Pair that with real backups, following the 3-2-1 rule: three copies of your data, on two different types of storage, with one copy kept offline or off-site. If ransomware does hit, a working backup is the difference between a bad afternoon and a business-ending event.</p>
-
-    <h2><span class="num">05</span>Train your team on the patterns, not just a slideshow once a year</h2>
-    <p>Generic annual security training rarely changes behavior. What works better is short, specific, recurring reminders tied to real patterns: what a phishing text actually looks like, what a spoofed caller ID sounds like, why a "verify your account" link deserves a second look before it's clicked.</p>
-    <p>Five minutes at a team meeting, once a month, covering one real example, beats an hour-long training nobody remembers by the following week.</p>
-
-    <div class="divider"></div>
-
-    <p class="closing">None of this requires a security budget. It requires picking one of these five and actually doing it this week — then coming back for the next one.</p>
-
-    <div class="byline">
-      <div class="av">SS</div>
+<main id="top">
+  <section class="hero wrap">
+    <div class="hero-grid">
       <div>
-        <div class="name">Signal &amp; Shield Desk</div>
-        <div class="role">Written from the SOC floor — telecom fraud &amp; incident response</div>
+        <div class="eyebrow">FIELD NOTES FROM THE SOC</div>
+        <h1>Cyber security, explained <span class="accent">without the jargon.</span></h1>
+        <p class="sub">Practical fraud-prevention and security guidance for small businesses and everyday users — written by someone who actually works the incident queue, not a marketing team.</p>
+        <div class="hero-ctas">
+          <a href="#signup" class="btn-primary">Get weekly fraud alerts →</a>
+          <a href="#posts" class="btn-ghost">Read the latest case file</a>
+        </div>
+        <span class="badge">Field-verified</span>
+      </div>
+
+      <div class="hero-art" aria-hidden="true">
+        <svg viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="200" cy="200" r="150" stroke="#1B2740" stroke-width="1"/>
+          <circle cx="200" cy="200" r="110" stroke="#1B2740" stroke-width="1"/>
+          <path d="M200 90 L280 122 V200 C280 250 245 285 200 305 C155 285 120 250 120 200 V122 Z"
+                fill="#0E1626" stroke="#2EE6FF" stroke-width="2"/>
+          <path d="M200 90 L280 122 V200 C280 250 245 285 200 305 C155 285 120 250 120 200 V122 Z"
+                fill="url(#shieldGlow)" opacity="0.5"/>
+          <path d="M165 200 L190 226 L240 168" stroke="#2EE6FF" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+          <g opacity="0.7">
+            <circle cx="200" cy="200" r="4" fill="#2EE6FF"/>
+            <circle cx="200" cy="200" r="60" stroke="#2EE6FF" stroke-width="1" opacity="0.35">
+              <animate attributeName="r" values="20;150" dur="3s" repeatCount="indefinite"/>
+              <animate attributeName="opacity" values="0.5;0" dur="3s" repeatCount="indefinite"/>
+            </circle>
+          </g>
+          <defs>
+            <linearGradient id="shieldGlow" x1="120" y1="90" x2="280" y2="305" gradientUnits="userSpaceOnUse">
+              <stop stop-color="#2EE6FF"/>
+              <stop offset="1" stop-color="#2EE6FF" stop-opacity="0"/>
+            </linearGradient>
+          </defs>
+        </svg>
       </div>
     </div>
 
-    <div class="back-cta">
-      <a href="/index.html#posts">← Back to all case files</a>
+    <div class="status-panel">
+      <div class="status-head">
+        <span>LIVE STATUS — SIGNAL &amp; SHIELD DESK</span>
+        <span id="clock"></span>
+      </div>
+      <div class="status-grid">
+        <div class="status-cell">
+          <div class="status-num">3</div>
+          <div class="status-label">CASE FILES PUBLISHED</div>
+        </div>
+        <div class="status-cell">
+          <div class="status-num">90%</div>
+          <div class="status-label">ATTACKS 2FA STOPS</div>
+        </div>
+        <div class="status-cell">
+          <div class="status-num">↑</div>
+          <div class="status-label">SIM-BOX FRAUD, EAST AFRICA</div>
+        </div>
+      </div>
     </div>
-  </article>
+  </section>
+
+  <section class="section wrap" id="posts">
+    <div class="section-head">
+      <div class="section-title">Latest case files</div>
+      <div class="section-sub">SORTED BY DATE OPENED</div>
+    </div>
+
+    <article class="case">
+      <div class="thumb">
+        <svg width="30" height="30" viewBox="0 0 24 24" fill="none"><path d="M12 2L20 5V11C20 16 16.5 20 12 22C7.5 20 4 16 4 11V5L12 2Z" stroke="#FFB020" stroke-width="1.6"/><path d="M9 12L11 14L15 9" stroke="#FFB020" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+      <div class="case-id"><span>CASE</span>001</div>
+      <div>
+        <span class="case-tag fraud">Fraud Prevention</span>
+        <h3>5 Simple Ways Small Businesses Can Protect Themselves From Cyber Fraud</h3>
+        <p>Real tactics fraud analysts see work in practice — not generic checklist advice — for businesses that can't afford a dedicated security team.</p>
+        <a class="readmore" href="/posts/small-business-fraud-protection.html">Read case file &rarr;</a>
+      </div>
+      <div class="case-meta">6 min read</div>
+    </article>
+
+    <article class="case">
+      <div class="thumb">
+        <svg width="30" height="30" viewBox="0 0 24 24" fill="none"><rect x="6" y="2" width="12" height="20" rx="2" stroke="#2EE6FF" stroke-width="1.6"/><path d="M10 6H14" stroke="#2EE6FF" stroke-width="1.6" stroke-linecap="round"/><circle cx="12" cy="18" r="1" fill="#2EE6FF"/></svg>
+      </div>
+      <div class="case-id"><span>CASE</span>002</div>
+      <div>
+        <span class="case-tag fraud">Fraud Prevention</span>
+        <h3>Why Reusing Passwords Is More Dangerous Than You Think</h3>
+        <p>How one breached account can cascade into every other account you own — and the ten-minute fix that stops it.</p>
+        <a class="readmore" href="/posts/why-reusing-passwords-is-dangerous.html">Read case file &rarr;</a>
+      </div>
+      <div class="case-meta">5 min read</div>
+    </article>
+  </section>
+
+  <section class="section wrap" id="signup">
+    <div class="engage">
+      <div class="engage-grid">
+        <div>
+          <h2>One fraud alert a week. No noise.</h2>
+          <p>Short, practical, written the same way as the case files above. Unsubscribe any time.</p>
+          <form class="signup" name="newsletter" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+            <input type="hidden" name="form-name" value="newsletter" />
+            <p style="display:none">
+              <label>Don't fill this out if you're human: <input name="bot-field" /></label>
+            </p>
+            <input type="email" name="email" placeholder="you@company.com" required aria-label="Email address" />
+            <button type="submit" class="btn-primary">Subscribe</button>
+          </form>
+          <small>Powered by Netlify Forms — works automatically once deployed, no backend required.</small>
+        </div>
+        <div class="trust-row" style="flex-direction:column;">
+          <div class="trust-item">SLOT — real partner logo (add when available)</div>
+          <div class="trust-item">SLOT — real reader testimonial (add when available)</div>
+          <div class="trust-item">SLOT — real press mention (add when available)</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section wrap" id="about" style="border-bottom:none;">
+    <div class="about">
+      <div>
+        <div class="section-title" style="margin-bottom:18px;">About this desk</div>
+        <p>Signal &amp; Shield is written from the SOC floor — real patterns seen investigating telecom fraud and monitoring security incidents, translated into advice small businesses and everyday readers can actually use.</p>
+        <p>No filler, no fear-mongering. Just what actually works.</p>
+      </div>
+      <div class="about-card">
+        <div class="k">Beat</div>
+        <div class="v">Telecom fraud &amp; SOC incident response</div>
+        <div class="k">Audience</div>
+        <div class="v">Small businesses &amp; everyday readers</div>
+        <div class="k">Standard</div>
+        <div class="v">Field-verified, no templated advice</div>
+      </div>
+    </div>
+  </section>
 </main>
 
 <footer class="wrap">
@@ -168,6 +415,32 @@ footer{ padding:36px 0; border-top:1px solid var(--line); }
     <span>Built with care, not templates.</span>
   </div>
 </footer>
+
+<script>
+const items = [
+  {type:'alert', label:'ALERT', text:'SIM-box fraud attempts rising across East African telecom networks'},
+  {type:'tip', label:'TIP', text:'Most breaches start with one reused password'},
+  {type:'note', label:'NOTE', text:'Two-factor authentication blocks over 90% of automated attacks'},
+  {type:'alert', label:'ALERT', text:'Fake "bank verification" calls remain the top fraud vector'},
+  {type:'tip', label:'TIP', text:'Back up before you patch, not after'},
+];
+const track = document.getElementById('tickerTrack');
+function renderTicker(list){
+  return list.map(i => `<span class="tk ${i.type}"><b>[${i.label}]</b> ${i.text}</span>`).join('');
+}
+track.innerHTML = renderTicker(items) + renderTicker(items);
+
+const clockEl = document.getElementById('clock');
+function tick(){
+  const d = new Date();
+  const hh = String(d.getHours()).padStart(2,'0');
+  const mm = String(d.getMinutes()).padStart(2,'0');
+  const ss = String(d.getSeconds()).padStart(2,'0');
+  clockEl.textContent = `${hh}:${mm}:${ss} LOCAL`;
+}
+tick();
+setInterval(tick, 1000);
+</script>
 
 </body>
 </html>
